@@ -16,7 +16,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import ReactDOM  from 'react-dom';
-import Constants from '../constants/Constants';
+import Constants from '../../constants/Constants';
 
 /**
  * A Searcher.

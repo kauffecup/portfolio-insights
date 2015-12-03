@@ -19,8 +19,8 @@ import { connect } from 'react-redux';
 // fellow containers
 import Companies from './Companies';
 // dumb components
-import Header   from '../components/Header';
-import Searcher from '../components/Searcher';
+import Header   from '../../components/web/Header';
+import Searcher from '../../components/web/Searcher';
 // actions
 import {
   getStrings,

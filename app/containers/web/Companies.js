@@ -18,7 +18,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import clone from 'clone';
 
-import Company from '../components/Company';
+import Company from '../../components/web/Company';
 
 import {
   getSentimentHistory,

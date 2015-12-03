@@ -14,6 +14,7 @@
 // limitations under the License.
 //------------------------------------------------------------------------------
 
+console.log('test');
 if (process.env.NODE_ENV === 'production') {
   module.exports = require('./Root.prod');
 } else {
