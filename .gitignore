@@ -2,6 +2,10 @@
 #
 .DS_Store
 
+# Web
+#
+bundle.js
+
 # Xcode
 #
 build/

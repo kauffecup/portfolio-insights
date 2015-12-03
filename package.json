@@ -3,10 +3,27 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "react-native start"
+    "start": "react-native start",
+    "web-build": "better-npm-run web-build",
+    "web-dev": "better-npm-run web-dev"
+  },
+  "betterScripts": {
+    "web-build": {
+      "command": "webpack --config web/webpack/prod.config.js --progress --colors",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "web-dev": {
+      "command": "webpack-dev-server --content-base web/public/ --config web/webpack/dev.config.js --hot",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    }
   },
   "dependencies": {
     "babel": "^5.8.23",
+    "better-npm-run": "0.0.4",
     "classnames": "^2.1.3",
     "clone": "^1.0.2",
     "d3": "^3.5.6",
@@ -26,9 +43,26 @@
     "superagent": "^1.3.0"
   },
   "devDependencies": {
+    "autoprefixer": "^5.2.0",
+    "autoprefixer-loader": "^3.1.0",
+    "babel-core": "~5.8.33",
+    "babel-loader": "~5.3.3",
+    "babel-plugin-react-transform": "^1.1.1",
+    "css-loader": "^0.23.0",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^1.0.2",
+    "eslint-plugin-react": "^3.11.2",
+    "less": "^2.5.3",
+    "less-loader": "^2.2.1",
+    "raw-loader": "^0.5.1",
     "redux-devtools": "^3.0.0-beta-3",
     "redux-devtools-dock-monitor": "^1.0.0-beta-3",
     "redux-devtools-log-monitor": "^1.0.0-beta-3",
-    "redux-logger": "^2.0.4"
+    "redux-logger": "^2.0.4",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.6",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-dev-server": "^1.12.1",
+    "webpack-hot-middleware": "^2.5.0"
   }
 }

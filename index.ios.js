@@ -1,6 +1,6 @@
 import React, { Component, AppRegistry, Text } from 'react-native';
 import Root           from './app/containers/native/Root';
-import configureStore from './app/store/configureStore';
+import configureStore from './app/store/configureStore.prod'; // TODO: get working with magic
 
 const store = configureStore();
 

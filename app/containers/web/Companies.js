@@ -24,7 +24,7 @@ import {
   getSentimentHistory,
   removeCompany,
   selectSymbolAndDate
-} from '../actions/actions';
+} from '../../actions/actions';
 
 class Companies extends Component {
   render() {

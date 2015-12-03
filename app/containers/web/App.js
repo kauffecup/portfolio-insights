@@ -30,7 +30,7 @@ import {
   addCompany,
   enterEdit,
   cancelEdit
-} from '../actions/actions';
+} from '../../actions/actions';
 
 /**
  * The app entry point
