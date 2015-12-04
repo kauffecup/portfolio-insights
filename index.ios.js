@@ -20,8 +20,6 @@ import configureStore from './app/store/configureStore.prod.js';
 
 const store = configureStore();
 
-console.log(process.env)
-
 class PortfolioInsights extends Component {
   render() {
     return (

@@ -14,18 +14,72 @@
 // limitations under the License.
 //------------------------------------------------------------------------------
 
-import React, { Component, Text, StyleSheet } from 'react-native';
+import React, { Component, Text, View, StyleSheet, PropTypes } from 'react-native';
+import { connect } from 'react-redux/native';
+// dumb components
+import Header from '../../components/native/Header';
+// actions
+import {
+  getStrings,
+  getStockData,
+  searchCompany,
+  clearPotentialCompanies,
+  addCompany,
+  enterEdit,
+  cancelEdit
+} from '../../actions/actions';
 
-export default class PortfolioInsights extends Component {
+class PortfolioInsights extends Component {
+  /**
+   * When we mount, load the strings and load our company data
+   */
+  componentDidMount() {
+    this.props.dispatch(getStrings(this.props.language));
+    // if we already have companies, request the stock data and
+    // sentiment history to populate our visualizations
+    const { dispatch } = this.props;
+    if (this.props.companies.length) {
+      const symbols = this.props.companies.map(c => c.symbol);
+      dispatch(getStockData(symbols));
+    }
+  }
+
   render() {
+    // injected by connect call
+    const {dispatch, strings, potentialCompanies, companies, editing} = this.props;
+
     return (
-        <Text style={styles.matt}>Matt Damon</Text>
+      <View style={styles.portfolioInsights}>
+        <Header strings={strings}
+          editing={editing}
+          onEdit={() => dispatch(enterEdit())}
+          onCancel={() => dispatch(cancelEdit())} />
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  matt: {
-    marginTop: 50
+  portfolioInsights: {
+    flexDirection: 'column'
   }
 });
+
+PortfolioInsights.propTypes = {
+  editing: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  strings: PropTypes.object.isRequired,
+  companies: PropTypes.array.isRequired,
+  potentialCompanies: PropTypes.object.isRequired,
+  language: PropTypes.string
+};
+
+const select = state => ({
+  strings: state.strings,
+  companies: state.companies.companies,
+  editing: state.companies.editing,
+  potentialCompanies: state.potentialCompanies
+});
+
+// Wrap the component to inject dispatch and state into it
+export default connect(select)(PortfolioInsights);

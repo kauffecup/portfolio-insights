@@ -79,7 +79,7 @@ PortfolioInsights.propTypes = {
   strings: PropTypes.object.isRequired,
   companies: PropTypes.array.isRequired,
   potentialCompanies: PropTypes.object.isRequired,
-  language: PropTypes.string.isRequired
+  language: PropTypes.string
 };
 
 const select = state => ({
