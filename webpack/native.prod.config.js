@@ -18,27 +18,31 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: [
-    path.join(__dirname, '../../index')
-  ],
+  entry: {
+    'index.ios': [path.join(__dirname, '../index.ios.js')],
+    'inex.android': [path.join(__dirname, '../index.android.js')]
+  },
   output: {
-    path: path.join(__dirname, '../public/'),
+    path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
-    publicPath: '/'
   },
   module: {
-    loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
-      { test: /\.svg$/, loaders: ['raw-loader']},
-      // take all less files, compile them, and bundle them in with our js bundle
-      { test: /\.less$/, loader: 'style!css!autoprefixer?browsers=last 2 version!less' }
-    ]
+    loaders: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: 'babel',
+      query: {
+        stage: 0,
+        plugins: []
+      }
+    }]
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
         // Useful to reduce the size of client-side libraries, e.g. react
-        NODE_ENV: JSON.stringify('production')
+        NODE_ENV: JSON.stringify('production'),
+        PLATFORM_ENV: JSON.stringify('native')
       }
     }),
     // optimizations

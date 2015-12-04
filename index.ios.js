@@ -16,9 +16,11 @@
 
 import React, { Component, AppRegistry, Text } from 'react-native';
 import Root           from './app/containers/native/Root';
-import configureStore from './app/store/configureStore.prod'; // TODO: get working with magic
+import configureStore from './app/store/configureStore.prod.js';
 
 const store = configureStore();
+
+console.log(process.env)
 
 class PortfolioInsights extends Component {
   render() {

@@ -16,21 +16,24 @@
 
 import Constants from '../constants/Constants';
 
-/** Configure the companies either from the url or from local storage */
-let symbols = /[&?]symbols=([^&]+)/.exec(location.href);
-symbols = symbols && symbols[1].split(',');
-/** @type {Array.<Companies>} The array of companies initialized from url param or local storage */
-let companies;
-if (symbols && symbols.length) {
-  companies = symbols.map(c => ({ symbol: c }) );
-} else {
-  companies = localStorage.getItem(Constants.COMPANY_LOCAL_STORAGE);
-  companies = companies ? JSON.parse(companies) : [];
-}
+let language = null;
+let companies = [];
+if (process.env.PLATFORM_ENV === 'web') {
+  // /** Configure the companies either from the url or from local storage */
+  let symbols = /[&?]symbols=([^&]+)/.exec(location.href);
+  symbols = symbols && symbols[1].split(',');
+  /** @type {Array.<Companies>} The array of companies initialized from url param or local storage */
+  if (symbols && symbols.length) {
+    companies = symbols.map(c => ({ symbol: c }) );
+  } else {
+    companies = localStorage.getItem(Constants.COMPANY_LOCAL_STORAGE);
+    companies = companies ? JSON.parse(companies) : [];
+  }
 
-/** @type {string} can force a language by specifying it in the url */
-let language = /[&?]language=([^&]+)/.exec(location.href);
-language = language && language[1];
+  /** @type {string} can force a language by specifying it in the url */
+  language = /[&?]language=([^&]+)/.exec(location.href);
+  language = language && language[1];
+}
 
 export default {
   language: language,

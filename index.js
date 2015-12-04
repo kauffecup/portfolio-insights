@@ -23,7 +23,7 @@ import configureStore from './app/store/configureStore';
 // but for now this is our move
 require('./app/styles/style.less');
 
-
+console.log(process.env)
 const store = configureStore();
 const rootElement = document.getElementById('root');
 
