@@ -1,0 +1,7 @@
+applications:
+- buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+  host: portfolioinsights
+  name: portfolioinsights
+  memory: 64M
+  stack: cflinuxfs2
+  path: ./web/public

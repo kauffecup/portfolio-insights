@@ -15,6 +15,8 @@
 //------------------------------------------------------------------------------
 
 import request from 'superagent';
+const baseURL = 'http://portfolio-endpoints.mybluemix.net';
+// const baseURL = 'http://localhost:3000';
 
 /**
  * Hit the companylookup endpoint with the proper query.
@@ -70,7 +72,7 @@ export function strings(language) {
  */
 function _queryHelper(url, query) {
   return new Promise((resolve, reject) => {
-    request.get(url)
+    request.get(baseURL + url)
       .query(query)
       .end((err, res) => {
         if (err) {
