@@ -2,9 +2,11 @@
 #
 .DS_Store
 
-# Web
+# bundles
 #
 bundle.js
+main.jsbundle
+index.android.bundle
 
 # Xcode
 #
