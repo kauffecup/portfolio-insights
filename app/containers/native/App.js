@@ -17,7 +17,8 @@
 import React, { Component, Text, View, StyleSheet, PropTypes } from 'react-native';
 import { connect } from 'react-redux/native';
 // dumb components
-import Header from '../../components/native/Header';
+import Header   from '../../components/native/Header';
+import Searcher from '../../components/native/Searcher';
 // actions
 import {
   getStrings,
@@ -54,6 +55,13 @@ class PortfolioInsights extends Component {
           editing={editing}
           onEdit={() => dispatch(enterEdit())}
           onCancel={() => dispatch(cancelEdit())} />
+        <Searcher strings={strings}
+          companies={companies}
+          potentialCompanies={potentialCompanies.companies}
+          loadingStatus={potentialCompanies.status}
+          onSearch={v => dispatch(searchCompany(v))}
+          onClear={() => dispatch(clearPotentialCompanies())}
+          onCompanyAdd={c => dispatch(addCompany(c))} />
       </View>
     );
   }
@@ -61,7 +69,8 @@ class PortfolioInsights extends Component {
 
 const styles = StyleSheet.create({
   portfolioInsights: {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    flex: 1
   }
 });
 

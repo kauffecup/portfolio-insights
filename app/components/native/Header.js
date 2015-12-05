@@ -33,8 +33,8 @@ export default class Header extends Component {
 const styles = StyleSheet.create({
   header: {
     paddingTop: 30,
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: 7,
+    paddingRight: 7,
     paddingBottom: 30,
     height: 30,
     alignItems: 'flex-start',
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   edit: {
     color: '#fff',
-    fontSize: 10
+    fontSize: 15
   }
 });
 
