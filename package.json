@@ -3,10 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "bundle": "rnws bundle --webpackConfigPath webpack/native.prod.config.js",
-    "start": "rnws start --webpackConfigPath webpack/native.dev.config.js",
+    "start": "react-native start",
+    "ios-bundle": "react-native bundle --dev false --entry-file index.ios.js --platform ios --bundle-output ios/main.jsbundle",
+    "ios-dev-bundle": "react-native bundle --entry-file index.ios.js --platform ios --bundle-output ios/main.jsbundle",
+    "android-bundle": "react-native bundle --dev false --entry-file index.android.js --platform android --bundle-output android/app/src/main/assets/index.android.bundle",
+    "android-dev-bundle": "react-native bundle --entry-file index.android.js --platform android --bundle-output android/app/src/main/assets/index.android.bundle",
     "web-bundle": "webpack --config webpack/web.prod.config.js --progress --colors",
-    "web-dev": "webpack-dev-server --content-base web/public/ --config webpack/web.dev.config.js --port 3001 --hot"
+    "web-dev": "webpack-dev-server --content-base web/public/ --config webpack/web.dev.config.js --port 3001 --hot",
+    "clear-cache": "gulp clear-cache"
   },
   "dependencies": {
     "babel": "^5.8.23",
@@ -39,10 +43,11 @@
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^1.0.2",
     "eslint-plugin-react": "^3.11.2",
+    "gulp": "^3.9.0",
     "less": "^2.5.3",
     "less-loader": "^2.2.1",
     "raw-loader": "^0.5.1",
-    "react-native-webpack-server": "^0.8.2",
+    "react-native-cli": "^0.1.7",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.1",
     "redbox-react": "^1.1.1",
