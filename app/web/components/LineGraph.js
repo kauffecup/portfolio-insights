@@ -76,5 +76,5 @@ export default class LineGraph extends Component {
 LineGraph.propTypes = {
   stockData: PropTypes.array.isRequired,
   sentimentData: PropTypes.array,
-  onSelectDate: PropTypes.func.isRequired
+  onSelectDate: PropTypes.func.isRequired,
 };

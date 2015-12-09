@@ -26,6 +26,6 @@ class PortfolioInsights extends Component {
       <Root store={store} />
     );
   }
-};
+}
 
 AppRegistry.registerComponent('PortfolioInsights', () => PortfolioInsights);

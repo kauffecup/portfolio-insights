@@ -20,7 +20,7 @@ import {
   companyLookup,
   stockPrice,
   tweets,
-  strings
+  strings,
 } from '../requester';
 
 /** Clear potential companies */

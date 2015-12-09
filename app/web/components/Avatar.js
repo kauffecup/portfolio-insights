@@ -26,7 +26,7 @@ export default class Avatar extends Component {
     const cClass = classNames('change', {
       neg: hC && (change < 0),
       neut: hC && (change === 0),
-      pos: hC && (change > 0)
+      pos: hC && (change > 0),
     });
     return (
       <div className={mainClass} onClick={onClick}>
@@ -45,5 +45,5 @@ Avatar.propTypes = {
   change: PropTypes.number,
   last: PropTypes.number,
   loading: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequiredm
 };

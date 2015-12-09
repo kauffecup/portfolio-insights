@@ -14,7 +14,7 @@
 // limitations under the License.
 //------------------------------------------------------------------------------
 
-import React, { Component, AppRegistry, Text } from 'react-native';
+import React, { Component, AppRegistry } from 'react-native';
 import Root           from './app/native/containers/Root';
 import configureStore from './app/store/configureStore.prod.js';
 
@@ -26,6 +26,6 @@ class PortfolioInsights extends Component {
       <Root store={store} />
     );
   }
-};
+}
 
 AppRegistry.registerComponent('PortfolioInsights', () => PortfolioInsights);

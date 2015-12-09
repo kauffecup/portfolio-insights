@@ -27,11 +27,31 @@ import Constants from '../../constants/Constants';
 export default class Searcher extends Component {
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       value: '',
-      dataSource: ds.cloneWithRows([])
+      dataSource: ds.cloneWithRows([]),
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { companies, potentialCompanies } = nextProps;
+    const { value } = this.state;
+    // some potential companies magic. goes through these steps:
+    // 1. filter out companies that match the current value. this allows us to immediately
+    //    filter down the list as the user's typing and network requests may/may not be happening
+    //    in the background. makes it feel snappier
+    // 2. filter out companies that have already been added by the user
+    // 3. limit the results to 15. this prevents the page feeling sluggish
+    const regex = new RegExp('^' + value, 'i');
+    const data = potentialCompanies.filter(pC =>
+      value ? regex.test(pC.description) : false
+    ).filter(pc =>
+      !companies.some(c => (c.description === pc.description) && (c.symbol === pc.symbol))
+    ).slice(0, 15);
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(data),
+    });
   }
 
   /**
@@ -73,31 +93,11 @@ export default class Searcher extends Component {
     }, 300);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { companies, potentialCompanies } = nextProps;
-    const { value } = this.state;
-    // some potential companies magic. goes through these steps:
-    // 1. filter out companies that match the current value. this allows us to immediately
-    //    filter down the list as the user's typing and network requests may/may not be happening
-    //    in the background. makes it feel snappier
-    // 2. filter out companies that have already been added by the user
-    // 3. limit the results to 15. this prevents the page feeling sluggish
-    const regex = new RegExp('^' + value, 'i');
-    let data = potentialCompanies.filter(pC =>
-      value ? regex.test(pC.description) : false
-    ).filter(pc =>
-      !companies.some(c => (c.description === pc.description) && (c.symbol === pc.symbol))
-    ).slice(0, 15);
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(data)
-    })
-  }
-
   /**
    * It's render time.
    */
   render() {
-    const { loadingStatus, companies, potentialCompanies } = this.props;
+    const { loadingStatus, potentialCompanies } = this.props;
     const { value, dataSource } = this.state;
 
     // if we're cleared or there's nothing in the input, don't display anything in the dropdown
@@ -112,11 +112,11 @@ export default class Searcher extends Component {
       pcComponent = <Text style={styles.text}>{this.props.strings.noResults}</Text>;
     // if none of these cases were hit, we proceed on as usual with our potential companies array
     } else {
-      pcComponent = <ListView
+      pcComponent = (<ListView
         style={styles.list}
         dataSource={dataSource}
         renderRow={pC => <Text style={styles.text}>{pC.description + '(' + pC.symbol + ')'}</Text>}
-      />;
+      />);
     }
 
     // once we've done our magic, go on with rendering as normal
@@ -140,16 +140,16 @@ const styles = StyleSheet.create({
     flex: 1,
     borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: '#000'
+    borderColor: '#000',
   },
   input: {
     borderColor: 'gray',
     borderWidth: 1,
-    height: 40
+    height: 40,
   },
   text: {
-    padding: 5
-  }
+    padding: 5,
+  },
 });
 
 Searcher.propTypes = {
@@ -159,5 +159,5 @@ Searcher.propTypes = {
   onSearch: PropTypes.func.isRequired,
   onClear: PropTypes.func.isRequired,
   onCompanyAdd: PropTypes.func.isRequired,
-  companies: PropTypes.array.isRequired
+  companies: PropTypes.array.isRequired,
 };

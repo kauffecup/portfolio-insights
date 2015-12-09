@@ -29,7 +29,7 @@ import {
   clearPotentialCompanies,
   addCompany,
   enterEdit,
-  cancelEdit
+  cancelEdit,
 } from '../../actions/actions';
 
 /**
@@ -79,14 +79,14 @@ PortfolioInsights.propTypes = {
   strings: PropTypes.object.isRequired,
   companies: PropTypes.array.isRequired,
   potentialCompanies: PropTypes.object.isRequired,
-  language: PropTypes.string
+  language: PropTypes.string,
 };
 
 const select = state => ({
   strings: state.strings,
   companies: state.companies.companies,
   editing: state.companies.editing,
-  potentialCompanies: state.potentialCompanies
+  potentialCompanies: state.potentialCompanies,
 });
 
 // Wrap the component to inject dispatch and state into it

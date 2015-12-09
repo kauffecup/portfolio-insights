@@ -37,12 +37,12 @@ const legend = [
   '#4292c6',
   '#2171b5',
   {color: '#08519c', textColor: '#deebf7'},
-  {color: '#08306b', textColor: '#deebf7'}
+  {color: '#08306b', textColor: '#deebf7'},
 ];
 
 const domain = {
   min: -1,
-  max: 1
+  max: 1,
 };
 
 export default class EntityBubbleChart extends Component {
@@ -50,7 +50,7 @@ export default class EntityBubbleChart extends Component {
     return entities.map(e => ({
       value: e.count,
       _id: e.text,
-      colorValue: e.averageSentiment
+      colorValue: e.averageSentiment,
     })).sort((s1, s2) => s2.value - s1.value);
   }
 
@@ -73,5 +73,5 @@ export default class EntityBubbleChart extends Component {
 }
 
 EntityBubbleChart.propTypes = {
-  entities: PropTypes.array.isRequired
+  entities: PropTypes.array.isRequired,
 };

@@ -42,13 +42,13 @@ export default {
   selectedDate: null,
   companies: {
     editing: false,
-    companies: companies
+    companies: companies,
   },
   potentialCompanies: {
     status: Constants.POTENTIAL_STATUS_CLEAR,
-    companies: []
+    companies: [],
   },
   stockData: {},
   sentimentHistory: {},
-  entityHistory: {}
+  entityHistory: {},
 };

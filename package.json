@@ -10,7 +10,8 @@
     "android-dev-bundle": "react-native bundle --entry-file index.android.js --platform android --bundle-output android/app/src/main/assets/index.android.bundle",
     "web-bundle": "webpack --config web/webpack/web.prod.config.js --progress --colors",
     "web-dev": "webpack-dev-server --content-base web/public/ --config web/webpack/web.dev.config.js --port 3001 --inline --hot --colors",
-    "clear-cache": "gulp clear-cache"
+    "clear-cache": "gulp clear-cache",
+    "lint": "eslint . --ignore-path .gitignore"
   },
   "dependencies": {
     "babel": "^5.8.23",

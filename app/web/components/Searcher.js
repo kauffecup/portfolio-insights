@@ -159,5 +159,5 @@ Searcher.propTypes = {
   onSearch: PropTypes.func.isRequired,
   onClear: PropTypes.func.isRequired,
   onCompanyAdd: PropTypes.func.isRequired,
-  companies: PropTypes.array.isRequired
+  companies: PropTypes.array.isRequired,
 };

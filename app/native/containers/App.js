@@ -14,7 +14,7 @@
 // limitations under the License.
 //------------------------------------------------------------------------------
 
-import React, { Component, Text, View, StyleSheet, PropTypes } from 'react-native';
+import React, { Component, View, StyleSheet, PropTypes } from 'react-native';
 import { connect } from 'react-redux/native';
 // dumb components
 import Header   from '../components/Header';
@@ -27,7 +27,7 @@ import {
   clearPotentialCompanies,
   addCompany,
   enterEdit,
-  cancelEdit
+  cancelEdit,
 } from '../../actions/actions';
 
 class PortfolioInsights extends Component {
@@ -70,8 +70,8 @@ class PortfolioInsights extends Component {
 const styles = StyleSheet.create({
   portfolioInsights: {
     flexDirection: 'column',
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 PortfolioInsights.propTypes = {
@@ -80,14 +80,14 @@ PortfolioInsights.propTypes = {
   strings: PropTypes.object.isRequired,
   companies: PropTypes.array.isRequired,
   potentialCompanies: PropTypes.object.isRequired,
-  language: PropTypes.string
+  language: PropTypes.string,
 };
 
 const select = state => ({
   strings: state.strings,
   companies: state.companies.companies,
   editing: state.companies.editing,
-  potentialCompanies: state.potentialCompanies
+  potentialCompanies: state.potentialCompanies,
 });
 
 // Wrap the component to inject dispatch and state into it

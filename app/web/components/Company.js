@@ -25,7 +25,7 @@ export default class Company extends Component {
     return this.props.data.map(d => ({
       symbol: this.props.symbol,
       date: d.date,
-      last: d.last
+      last: d.last,
     }));
   }
 
@@ -33,7 +33,7 @@ export default class Company extends Component {
     return this.props.sentimentHistory.map(d => ({
       mattDamon: 'Sentiment',
       date: d.date,
-      sentiment: d.sentiment
+      sentiment: d.sentiment,
     }));
   }
 
@@ -90,6 +90,6 @@ Company.propTypes = {
   entities: PropTypes.array,
   sentimentHistory: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.array
-  ]).isRequired
+    PropTypes.array,
+  ]).isRequired,
 };

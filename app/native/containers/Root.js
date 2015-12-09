@@ -14,7 +14,7 @@
 // limitations under the License.
 //------------------------------------------------------------------------------
 
-import React, { Component, Text } from 'react-native';
+import React, { Component, PropTypes } from 'react-native';
 import { Provider } from 'react-redux/native';
 import PortfolioInsights from './App';
 
@@ -27,3 +27,7 @@ export default class Root extends Component {
     );
   }
 }
+
+Root.propTypes = {
+  store: PropTypes.object.isRequired,
+};

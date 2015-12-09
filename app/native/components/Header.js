@@ -39,22 +39,22 @@ const styles = StyleSheet.create({
     height: 30,
     alignItems: 'flex-start',
     backgroundColor: '#4292c6',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   title: {
     color: '#fff',
     fontSize: 15,
-    flex: 1
+    flex: 1,
   },
   edit: {
     color: '#fff',
-    fontSize: 15
-  }
+    fontSize: 15,
+  },
 });
 
 Header.propTypes = {
   strings: PropTypes.object.isRequired,
   editing: PropTypes.bool.isRequired,
   onEdit: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired
+  onCancel: PropTypes.func.isRequired,
 };

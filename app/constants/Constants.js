@@ -45,5 +45,5 @@ export default keyMirror({
   EDIT_ENTER: null,
   EDIT_CANCEL: null,
 
-  SYMBOL_AND_DATE: null
+  SYMBOL_AND_DATE: null,
 });

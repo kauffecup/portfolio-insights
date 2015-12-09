@@ -23,7 +23,7 @@ import Company from '../components/Company';
 import {
   getSentimentHistory,
   removeCompany,
-  selectSymbolAndDate
+  selectSymbolAndDate,
 } from '../../actions/actions';
 
 class Companies extends Component {
@@ -48,7 +48,7 @@ Companies.propTypes = {
   strings: PropTypes.object.isRequired,
   companies: PropTypes.array.isRequired,
   editing: PropTypes.bool.isRequired,
-  selectedDate: PropTypes.string.isRequired
+  selectedDate: PropTypes.string.isRequired,
 };
 
 /**
@@ -73,7 +73,7 @@ const select = state => {
     strings: state.strings,
     companies: myCompanies,
     editing: state.companies.editing,
-    selectedDate: state.selectedDate
+    selectedDate: state.selectedDate,
   };
 };
 
