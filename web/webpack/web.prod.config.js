@@ -19,10 +19,10 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: [
-    path.join(__dirname, '../index')
+    path.join(__dirname, '../../app/web/index')
   ],
   output: {
-    path: path.join(__dirname, '../web/public/'),
+    path: path.join(__dirname, '../public/'),
     filename: 'bundle.js',
     publicPath: '/'
   },

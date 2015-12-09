@@ -14,13 +14,11 @@
 // limitations under the License.
 //------------------------------------------------------------------------------
 
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-// fellow containers
-import Companies from './Companies';
+import React, { Component, Text, View, StyleSheet, PropTypes } from 'react-native';
+import { connect } from 'react-redux/native';
 // dumb components
-import Header   from '../../components/web/Header';
-import Searcher from '../../components/web/Searcher';
+import Header   from '../components/Header';
+import Searcher from '../components/Searcher';
 // actions
 import {
   getStrings,
@@ -32,9 +30,6 @@ import {
   cancelEdit
 } from '../../actions/actions';
 
-/**
- * The app entry point
- */
 class PortfolioInsights extends Component {
   /**
    * When we mount, load the strings and load our company data
@@ -55,7 +50,7 @@ class PortfolioInsights extends Component {
     const {dispatch, strings, potentialCompanies, companies, editing} = this.props;
 
     return (
-      <div className="portfolio-insights">
+      <View style={styles.portfolioInsights}>
         <Header strings={strings}
           editing={editing}
           onEdit={() => dispatch(enterEdit())}
@@ -67,11 +62,17 @@ class PortfolioInsights extends Component {
           onSearch={v => dispatch(searchCompany(v))}
           onClear={() => dispatch(clearPotentialCompanies())}
           onCompanyAdd={c => dispatch(addCompany(c))} />
-        <Companies />
-      </div>
+      </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  portfolioInsights: {
+    flexDirection: 'column',
+    flex: 1
+  }
+});
 
 PortfolioInsights.propTypes = {
   editing: PropTypes.bool.isRequired,

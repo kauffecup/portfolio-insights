@@ -21,10 +21,10 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
     'webpack-hot-middleware/client',
-    path.join(__dirname, '../index')
+    path.join(__dirname, '../../app/web/index')
   ],
   output: {
-    path: path.join(__dirname, '../web/public'),
+    path: path.join(__dirname, '../public'),
     filename: 'bundle.js',
     publicPath: '/'
   },

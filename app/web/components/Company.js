@@ -18,7 +18,7 @@ import React, { Component, PropTypes } from 'react';
 import LineGraph         from './LineGraph';
 import Avatar            from './Avatar';
 import EntityBubbleChart from './EntityBubbleChart';
-// import minusSvg          from '../svgs/minus.svg';
+import minusSvg          from '../svgs/minus.svg';
 
 export default class Company extends Component {
   formatStockData() {

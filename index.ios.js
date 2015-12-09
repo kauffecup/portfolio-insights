@@ -15,7 +15,7 @@
 //------------------------------------------------------------------------------
 
 import React, { Component, AppRegistry, Text } from 'react-native';
-import Root           from './app/containers/native/Root';
+import Root           from './app/native/containers/Root';
 import configureStore from './app/store/configureStore.prod.js';
 
 const store = configureStore();

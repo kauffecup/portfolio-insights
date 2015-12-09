@@ -15,7 +15,7 @@
 //------------------------------------------------------------------------------
 
 import React, { Component, PropTypes } from 'react';
-import IBMsvg from '../../svgs/IBM.svg';
+import IBMsvg from '../svgs/IBM.svg';
 
 export default class Header extends Component {
   render() {
