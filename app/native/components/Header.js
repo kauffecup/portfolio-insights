@@ -20,6 +20,7 @@ import React, {
   View,
   Text,
   Image,
+  TouchableHighlight,
 } from 'react-native';
 import { headerStyle } from '../styles/styles';
 
@@ -35,7 +36,9 @@ export default class Header extends Component {
           source={require('../images/ibm.png')}
         />
         <Text style={headerStyle.title}>{strings.portfolioInsights}</Text>
-        <Text style={headerStyle.edit} onPress={linkClick}>{linkString}</Text>
+        <TouchableHighlight onPress={linkClick} underlayColor="transparent">
+          <Text style={headerStyle.edit}>{linkString}</Text>
+        </TouchableHighlight>
       </View>
     );
   }
