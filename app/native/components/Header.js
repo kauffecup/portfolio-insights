@@ -14,7 +14,14 @@
 // limitations under the License.
 //------------------------------------------------------------------------------
 
-import React, { Component, PropTypes, View, Text, StyleSheet } from 'react-native';
+import React, {
+  Component,
+  PropTypes,
+  View,
+  Text,
+  Image,
+} from 'react-native';
+import { headerStyle } from '../styles/styles';
 
 export default class Header extends Component {
   render() {
@@ -22,35 +29,17 @@ export default class Header extends Component {
     const linkString = editing ? strings.cancel : strings.edit;
     const linkClick  = editing ? onCancel       : onEdit;
     return (
-      <View style={styles.header}>
-        <Text style={styles.title}>{strings.portfolioInsights}</Text>
-        <Text style={styles.edit} onPress={linkClick}>{linkString}</Text>
+      <View style={headerStyle.header}>
+        <Image
+          style={headerStyle.icon}
+          source={require('../images/ibm.png')}
+        />
+        <Text style={headerStyle.title}>{strings.portfolioInsights}</Text>
+        <Text style={headerStyle.edit} onPress={linkClick}>{linkString}</Text>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  header: {
-    paddingTop: 30,
-    paddingLeft: 7,
-    paddingRight: 7,
-    paddingBottom: 30,
-    height: 30,
-    alignItems: 'flex-start',
-    backgroundColor: '#4292c6',
-    flexDirection: 'row',
-  },
-  title: {
-    color: '#fff',
-    fontSize: 15,
-    flex: 1,
-  },
-  edit: {
-    color: '#fff',
-    fontSize: 15,
-  },
-});
 
 Header.propTypes = {
   strings: PropTypes.object.isRequired,

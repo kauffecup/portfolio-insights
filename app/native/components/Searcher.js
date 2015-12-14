@@ -14,8 +14,9 @@
 // limitations under the License.
 //------------------------------------------------------------------------------
 
-import React, { Component, PropTypes, View, TextInput, ListView, Text, StyleSheet } from 'react-native';
+import React, { Component, PropTypes, View, TextInput, ListView, Text } from 'react-native';
 import Constants from '../../constants/Constants';
+import { searcherStyle } from '../styles/styles';
 
 /**
  * A Searcher.
@@ -106,24 +107,24 @@ export default class Searcher extends Component {
       pcComponent = null;
     // if we're loading and don't have any companies loaded already, show the loading message
     } else if (loadingStatus === Constants.POTENTIAL_STATUS_LOADING && !potentialCompanies.length) {
-      pcComponent = <Text style={styles.text}>{this.props.strings.loading}</Text>;
+      pcComponent = <Text style={searcherStyle.text}>{this.props.strings.loading}</Text>;
     // otherwise we've gotten stuff back, if we don't have anythin' show the no results message
     } else if (!potentialCompanies.length) {
-      pcComponent = <Text style={styles.text}>{this.props.strings.noResults}</Text>;
+      pcComponent = <Text style={searcherStyle.text}>{this.props.strings.noResults}</Text>;
     // if none of these cases were hit, we proceed on as usual with our potential companies array
     } else {
       pcComponent = (<ListView
-        style={styles.list}
+        style={searcherStyle.list}
         dataSource={dataSource}
-        renderRow={pC => <Text style={styles.text}>{pC.description + '(' + pC.symbol + ')'}</Text>}
+        renderRow={pC => <Text style={searcherStyle.text}>{pC.description + '(' + pC.symbol + ')'}</Text>}
       />);
     }
 
     // once we've done our magic, go on with rendering as normal
     return (
-      <View style={styles.searcher} onFocus={this.handleFocus.bind(this)}>
+      <View style={searcherStyle.searcher} onFocus={this.handleFocus.bind(this)}>
         <TextInput
-          style={styles.input}
+          style={searcherStyle.input}
           value={value}
           onChangeText={this.handleChange.bind(this)}
           placeholder={this.props.strings.companySearch}
@@ -134,23 +135,6 @@ export default class Searcher extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  searcher: {
-    flex: 1,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: '#000',
-  },
-  input: {
-    borderColor: 'gray',
-    borderWidth: 1,
-    height: 40,
-  },
-  text: {
-    padding: 5,
-  },
-});
 
 Searcher.propTypes = {
   strings: PropTypes.object.isRequired,

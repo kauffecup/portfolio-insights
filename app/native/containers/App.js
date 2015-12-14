@@ -14,8 +14,9 @@
 // limitations under the License.
 //------------------------------------------------------------------------------
 
-import React, { Component, View, StyleSheet, PropTypes } from 'react-native';
-import { connect } from 'react-redux/native';
+import React, { Component, View, PropTypes } from 'react-native';
+import { connect }  from 'react-redux/native';
+import { appStyle } from '../styles/styles';
 // dumb components
 import Header   from '../components/Header';
 import Searcher from '../components/Searcher';
@@ -50,7 +51,7 @@ class PortfolioInsights extends Component {
     const {dispatch, strings, potentialCompanies, companies, editing} = this.props;
 
     return (
-      <View style={styles.portfolioInsights}>
+      <View style={appStyle.portfolioInsights}>
         <Header strings={strings}
           editing={editing}
           onEdit={() => dispatch(enterEdit())}
@@ -66,13 +67,6 @@ class PortfolioInsights extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  portfolioInsights: {
-    flexDirection: 'column',
-    flex: 1,
-  },
-});
 
 PortfolioInsights.propTypes = {
   editing: PropTypes.bool.isRequired,
