@@ -23,7 +23,9 @@ import initialState from './initialState';
  * Helper method to store the companies in the browser's local storage
  */
 function _updateLocalStorage(companies) {
-  localStorage.setItem(Constants.COMPANY_LOCAL_STORAGE, JSON.stringify(companies));
+  if (process.env.PLATFORM_ENV === 'web') {
+    localStorage.setItem(Constants.COMPANY_LOCAL_STORAGE, JSON.stringify(companies));
+  }
 }
 
 export default function reduce(state = initialState, action) {

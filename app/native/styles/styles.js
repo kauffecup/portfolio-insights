@@ -17,6 +17,12 @@
 import { StyleSheet } from 'react-native';
 
 const accentColor = '#4292c6';
+const accentColor2 = '#08306b';
+const backgroundColor = '#f0f0f0';
+const secondaryTextColor = '#969696';
+
+const leftPadding = 7;
+const rightPadding = 7;
 
 export const appStyle = StyleSheet.create({
   portfolioInsights: {
@@ -28,8 +34,8 @@ export const appStyle = StyleSheet.create({
 export const headerStyle = StyleSheet.create({
   header: {
     paddingTop: 30,
-    paddingLeft: 7,
-    paddingRight: 7,
+    paddingLeft: leftPadding,
+    paddingRight: rightPadding,
     paddingBottom: 30,
     height: 30,
     alignItems: 'flex-start',
@@ -55,12 +61,22 @@ export const headerStyle = StyleSheet.create({
 
 export const searcherStyle = StyleSheet.create({
   searcher: {
-    flex: 1,
+    height: 40,
+    borderBottomWidth: 1,
+    borderBottomColor: secondaryTextColor,
   },
   input: {
-    height: 40,
+    height: 39,
+    paddingLeft: leftPadding,
+    paddingRight: rightPadding,
+    paddingTop: 5,
+    paddingBottom: 5,
   },
   text: {
     padding: 5,
+  },
+  list: {
+    position: 'absolute',
+    top: 40,
   },
 });

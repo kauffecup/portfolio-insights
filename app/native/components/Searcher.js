@@ -36,8 +36,9 @@ export default class Searcher extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { companies, potentialCompanies } = nextProps;
+    const { companies, potentialCompanies, loadingStatus } = nextProps;
     const { value } = this.state;
+
     // some potential companies magic. goes through these steps:
     // 1. filter out companies that match the current value. this allows us to immediately
     //    filter down the list as the user's typing and network requests may/may not be happening
@@ -45,11 +46,22 @@ export default class Searcher extends Component {
     // 2. filter out companies that have already been added by the user
     // 3. limit the results to 15. this prevents the page feeling sluggish
     const regex = new RegExp('^' + value, 'i');
-    const data = potentialCompanies.filter(pC =>
+    let data = potentialCompanies.filter(pC =>
       value ? regex.test(pC.description) : false
     ).filter(pc =>
       !companies.some(c => (c.description === pc.description) && (c.symbol === pc.symbol))
     ).slice(0, 15);
+
+    if (loadingStatus === Constants.POTENTIAL_STATUS_CLEAR || !value) {
+      data = [];
+    // if we're loading and don't have any companies loaded already, show the loading message
+    } else if (loadingStatus === Constants.POTENTIAL_STATUS_LOADING && !potentialCompanies.length) {
+      data = [this.props.strings.loading];
+    // otherwise we've gotten stuff back, if we don't have anythin' show the no results message
+    } else if (!potentialCompanies.length) {
+      data = [this.props.strings.noResults];
+    }
+
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(data),
     });
@@ -69,9 +81,8 @@ export default class Searcher extends Component {
    * When adding a company... add the company, clear and refocus the input
    */
   handleClick(company) {
-    this.props.onCompanyAdd(company);
     this.setState({value: ''});
-    // this.refs.input.getDOMNode().focus();
+    this.props.onCompanyAdd(company);
   }
 
   /**
@@ -98,39 +109,32 @@ export default class Searcher extends Component {
    * It's render time.
    */
   render() {
-    const { loadingStatus, potentialCompanies } = this.props;
     const { value, dataSource } = this.state;
-
-    // if we're cleared or there's nothing in the input, don't display anything in the dropdown
-    let pcComponent;
-    if (loadingStatus === Constants.POTENTIAL_STATUS_CLEAR || !value) {
-      pcComponent = null;
-    // if we're loading and don't have any companies loaded already, show the loading message
-    } else if (loadingStatus === Constants.POTENTIAL_STATUS_LOADING && !potentialCompanies.length) {
-      pcComponent = <Text style={searcherStyle.text}>{this.props.strings.loading}</Text>;
-    // otherwise we've gotten stuff back, if we don't have anythin' show the no results message
-    } else if (!potentialCompanies.length) {
-      pcComponent = <Text style={searcherStyle.text}>{this.props.strings.noResults}</Text>;
-    // if none of these cases were hit, we proceed on as usual with our potential companies array
-    } else {
-      pcComponent = (<ListView
-        style={searcherStyle.list}
-        dataSource={dataSource}
-        renderRow={pC => <Text style={searcherStyle.text}>{pC.description + '(' + pC.symbol + ')'}</Text>}
-      />);
-    }
 
     // once we've done our magic, go on with rendering as normal
     return (
-      <View style={searcherStyle.searcher} onFocus={this.handleFocus.bind(this)}>
+      <View style={searcherStyle.searcher}>
         <TextInput
           style={searcherStyle.input}
           value={value}
-          onChangeText={this.handleChange.bind(this)}
           placeholder={this.props.strings.companySearch}
-          ref="input"
+          onChangeText={this.handleChange.bind(this)}
+          onFocus={this.handleFocus.bind(this)}
         />
-        {pcComponent}
+        <ListView
+          style={searcherStyle.list}
+          dataSource={dataSource}
+          renderRow={pC => {
+            if (typeof pC === 'string') {
+              return <Text style={searcherStyle.text}>{pC}</Text>;
+            }
+            return (
+              <Text style={searcherStyle.text} onPress={this.handleClick.bind(this, pC)}>
+                {pC.description + '(' + pC.symbol + ')'}
+              </Text>
+            );
+          }}
+        />
       </View>
     );
   }
