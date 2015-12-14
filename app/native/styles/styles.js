@@ -62,21 +62,36 @@ export const headerStyle = StyleSheet.create({
 export const searcherStyle = StyleSheet.create({
   searcher: {
     height: 40,
-    borderBottomWidth: 1,
-    borderBottomColor: secondaryTextColor,
+  },
+  searcherWithResults: {
+    flex: 1,
+    flexDirection: 'column',
   },
   input: {
-    height: 39,
+    height: 40,
+    borderBottomWidth: 1,
+    borderBottomColor: secondaryTextColor,
     paddingLeft: leftPadding,
     paddingRight: rightPadding,
     paddingTop: 5,
     paddingBottom: 5,
   },
+  list: {
+    flex: 1,
+  },
   text: {
     padding: 5,
   },
-  list: {
-    position: 'absolute',
-    top: 40,
+});
+
+export const companiesStyle = StyleSheet.create({
+  companies: {
+    flex: 1,
+  },
+});
+
+export const companyStyle = StyleSheet.create({
+  text: {
+    padding: 5,
   },
 });

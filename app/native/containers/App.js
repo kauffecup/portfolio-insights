@@ -17,6 +17,9 @@
 import React, { Component, View, PropTypes } from 'react-native';
 import { connect }  from 'react-redux/native';
 import { appStyle } from '../styles/styles';
+import Constants    from '../../constants/Constants';
+// fellow containers
+import Companies from './Companies';
 // dumb components
 import Header   from '../components/Header';
 import Searcher from '../components/Searcher';
@@ -55,14 +58,17 @@ class PortfolioInsights extends Component {
         <Header strings={strings}
           editing={editing}
           onEdit={() => dispatch(enterEdit())}
-          onCancel={() => dispatch(cancelEdit())} />
+          onCancel={() => dispatch(cancelEdit())}
+        />
         <Searcher strings={strings}
           companies={companies}
           potentialCompanies={potentialCompanies.companies}
           loadingStatus={potentialCompanies.status}
           onSearch={v => dispatch(searchCompany(v))}
           onClear={() => dispatch(clearPotentialCompanies())}
-          onCompanyAdd={c => dispatch(addCompany(c))} />
+          onCompanyAdd={c => dispatch(addCompany(c))}
+        />
+        {potentialCompanies.status === Constants.POTENTIAL_STATUS_CLEAR ? <Companies /> : null}
       </View>
     );
   }

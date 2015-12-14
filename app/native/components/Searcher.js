@@ -109,11 +109,12 @@ export default class Searcher extends Component {
    * It's render time.
    */
   render() {
+    const { loadingStatus } = this.props;
     const { value, dataSource } = this.state;
 
     // once we've done our magic, go on with rendering as normal
     return (
-      <View style={searcherStyle.searcher}>
+      <View style={loadingStatus === Constants.POTENTIAL_STATUS_CLEAR ? searcherStyle.searcher : searcherStyle.searcherWithResults}>
         <TextInput
           style={searcherStyle.input}
           value={value}
@@ -130,7 +131,7 @@ export default class Searcher extends Component {
             }
             return (
               <Text style={searcherStyle.text} onPress={this.handleClick.bind(this, pC)}>
-                {pC.description + '(' + pC.symbol + ')'}
+                {pC.description + ' (' + pC.symbol + ')'}
               </Text>
             );
           }}

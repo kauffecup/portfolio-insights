@@ -37,6 +37,9 @@ export default function reduce(state = initialState, action) {
       companies: assign({}, state.companies, {
         companies: newCompanies,
       }),
+      potentialCompanies: assign({}, state.potentialCompanies, {
+        status: Constants.POTENTIAL_STATUS_CLEAR,
+      }),
     });
 
   case Constants.REMOVE_COMPANY:
