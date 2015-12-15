@@ -14,29 +14,15 @@
 // limitations under the License.
 //------------------------------------------------------------------------------
 
+import { AsyncStorage } from 'react-native';
 import Constants from '../constants/Constants';
 
-let language = null;
-if (process.env.PLATFORM_ENV === 'web') {
-  /** @type {string} can force a language by specifying it in the url */
-  language = /[&?]language=([^&]+)/.exec(location.href);
-  language = language && language[1];
+export function loadCompanies() {
+  return AsyncStorage.getItem(Constants.COMPANY_LOCAL_STORAGE).then(c =>
+    c ? JSON.parse(c) : []
+  );
 }
 
-export default {
-  language: language,
-  strings: {},
-  selectedCompany: null,
-  selectedDate: null,
-  companies: {
-    editing: false,
-    companies: [],
-  },
-  potentialCompanies: {
-    status: Constants.POTENTIAL_STATUS_CLEAR,
-    companies: [],
-  },
-  stockData: {},
-  sentimentHistory: {},
-  entityHistory: {},
-};
+export function saveCompanies(companies) {
+  return AsyncStorage.setItem(Constants.COMPANY_LOCAL_STORAGE, JSON.stringify(companies));
+}

@@ -20,6 +20,8 @@ export default keyMirror({
   COMPANY_LOCAL_STORAGE: null,
   COMPANIES_LOADING: null,
   COMPANY_DATA: null,
+  INITIAL_COMPANIES_LOADING: null,
+  INITIAL_COMPANIES_DATA: null,
 
   ADD_COMPANY: null,
   REMOVE_COMPANY: null,

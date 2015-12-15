@@ -19,20 +19,17 @@ import assign       from 'object-assign';
 import Constants    from '../constants/Constants';
 import initialState from './initialState';
 
-/**
- * Helper method to store the companies in the browser's local storage
- */
-function _updateLocalStorage(companies) {
-  if (process.env.PLATFORM_ENV === 'web') {
-    localStorage.setItem(Constants.COMPANY_LOCAL_STORAGE, JSON.stringify(companies));
-  }
-}
-
 export default function reduce(state = initialState, action) {
   switch (action.type) {
+  case Constants.INITIAL_COMPANIES_DATA:
+    return assign({}, state, {
+      companies: assign({}, state.companies, {
+        companies: action.companies,
+      }),
+    });
+
   case Constants.ADD_COMPANY:
     const newCompanies = [action.company, ...state.companies.companies];
-    _updateLocalStorage(newCompanies);
     return assign({}, state, {
       companies: assign({}, state.companies, {
         companies: newCompanies,
@@ -55,7 +52,6 @@ export default function reduce(state = initialState, action) {
     delete entityHistoryMap[symbol];
     // now remove company
     const newCompaniess = state.companies.companies.filter(c => c.symbol !== action.company.symbol);
-    _updateLocalStorage(newCompanies);
     return assign({}, state, {
       stockData: stockDataMap,
       sentimentHistory: sentimentDataMap,

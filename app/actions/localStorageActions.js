@@ -14,29 +14,8 @@
 // limitations under the License.
 //------------------------------------------------------------------------------
 
-import Constants from '../constants/Constants';
-
-let language = null;
 if (process.env.PLATFORM_ENV === 'web') {
-  /** @type {string} can force a language by specifying it in the url */
-  language = /[&?]language=([^&]+)/.exec(location.href);
-  language = language && language[1];
+  module.exports = require('./localStorageActions.web');
+} else {
+  module.exports = require('./localStorageActions.native');
 }
-
-export default {
-  language: language,
-  strings: {},
-  selectedCompany: null,
-  selectedDate: null,
-  companies: {
-    editing: false,
-    companies: [],
-  },
-  potentialCompanies: {
-    status: Constants.POTENTIAL_STATUS_CLEAR,
-    companies: [],
-  },
-  stockData: {},
-  sentimentHistory: {},
-  entityHistory: {},
-};

@@ -15,6 +15,7 @@
 //------------------------------------------------------------------------------
 
 import Constants from '../constants/Constants';
+import { loadCompanies, saveCompanies } from './localStorageActions';
 import {
   sentimentHistory,
   companyLookup,
@@ -23,21 +24,20 @@ import {
   strings,
 } from '../requester';
 
+/** Pay it forward */
+export const loadInitialCompanies = loadCompanies;
+export const saveCurrentCompanies = saveCompanies;
+
 /** Clear potential companies */
 export function clearPotentialCompanies() {
   return { type: Constants.CLEAR_POTENTIAL_COMPANIES };
-}
-
-/** Remove a company */
-export function removeCompany(company) {
-  return { type: Constants.REMOVE_COMPANY, company: company };
 }
 
 /** Enter edit mode */
 export function enterEdit() {
   return { type: Constants.EDIT_ENTER };
 }
- /** Cancel edit mode */
+/** Cancel edit mode */
 export function cancelEdit() {
   return { type: Constants.EDIT_CANCEL };
 }
@@ -45,6 +45,41 @@ export function cancelEdit() {
 /* Select a symbol and date... to show it's entities */
 export function selectSymbolAndDate(symbol, date) {
   return { type: Constants.SYMBOL_AND_DATE, symbol: symbol, date: date };
+}
+
+/** Load our companies from local storage, and then populate their stock data */
+export function initialize() {
+  return (dispatch) => {
+    dispatch({ type: Constants.INITIAL_COMPANIES_LOADING });
+    loadInitialCompanies().then(companies => {
+      dispatch({ type: Constants.INITIAL_COMPANIES_DATA, companies: companies });
+      if (companies.length) {
+        dispatch(getStockData(companies.map(c => c.symbol)));
+      }
+    });
+  };
+}
+
+/** Add a company */
+export function addCompany(company) {
+  return (dispatch, getState) => {
+    dispatch({ type: Constants.ADD_COMPANY, company: company });
+    saveCurrentCompanies(getState().companies.companies);
+    if (company.symbol) {
+      dispatch({ type: Constants.STOCK_PRICE_LOADING, symbols: company.symbol });
+      stockPrice(company.symbol).then(data => {
+        dispatch({ type: Constants.STOCK_PRICE_DATA, data: data });
+      });
+    }
+  };
+}
+
+/** Remove a company */
+export function removeCompany(company) {
+  return (dispatch, getState) => {
+    dispatch({ type: Constants.REMOVE_COMPANY, company: company });
+    saveCurrentCompanies(getState().companies.companies);
+  };
 }
 
 /** Search for companies */
@@ -68,19 +103,6 @@ export function toggleSelect(symbol) {
       dispatch({ type: Constants.DESELECT_COMPANY, symbol: s });
     }
     // todo: sentiment history?
-  };
-}
-
-/** Add a company */
-export function addCompany(company) {
-  return dispatch => {
-    dispatch({ type: Constants.ADD_COMPANY, company: company });
-    if (company.symbol) {
-      dispatch({ type: Constants.STOCK_PRICE_LOADING, symbols: company.symbol });
-      stockPrice(company.symbol).then(data => {
-        dispatch({ type: Constants.STOCK_PRICE_DATA, data: data });
-      });
-    }
   };
 }
 

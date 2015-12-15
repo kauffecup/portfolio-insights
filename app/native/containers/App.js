@@ -26,7 +26,7 @@ import Searcher from '../components/Searcher';
 // actions
 import {
   getStrings,
-  getStockData,
+  initialize,
   searchCompany,
   clearPotentialCompanies,
   addCompany,
@@ -39,14 +39,9 @@ class PortfolioInsights extends Component {
    * When we mount, load the strings and load our company data
    */
   componentDidMount() {
-    this.props.dispatch(getStrings(this.props.language));
-    // if we already have companies, request the stock data and
-    // sentiment history to populate our visualizations
     const { dispatch } = this.props;
-    if (this.props.companies.length) {
-      const symbols = this.props.companies.map(c => c.symbol);
-      dispatch(getStockData(symbols));
-    }
+    dispatch(getStrings(this.props.language));
+    dispatch(initialize());
   }
 
   render() {
