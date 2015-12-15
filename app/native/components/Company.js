@@ -14,7 +14,13 @@
 // limitations under the License.
 //------------------------------------------------------------------------------
 
-import React, { Component, PropTypes, View, Text } from 'react-native';
+import React, {
+  Component,
+  PropTypes,
+  View,
+  Image,
+  TouchableHighlight,
+} from 'react-native';
 import { companyStyle } from '../styles/styles';
 import Avatar           from './Avatar';
 
@@ -37,7 +43,7 @@ export default class Company extends Component {
 
   render() {
     const { symbol, description, data, onClick, sentimentHistory,
-      onSelectDate, editing, entities } = this.props;
+      onSelectDate, editing, entities, onRemove } = this.props;
     const myStockData = this.formatStockData();
     const sentimentLoading = sentimentHistory === 'loading';
 
@@ -49,13 +55,15 @@ export default class Company extends Component {
     const loading = !data.length || sentimentLoading;
     const change = data.length ? data[data.length - 1].change : null;
     const last = data.length ? data[data.length - 1].last : null;
-    //
-    // // conditional components
-    // const editBtn = editing ?
-    //   <div className="remove"
-    //     dangerouslySetInnerHTML={{__html: minusSvg}}
-    //     onClick={this.props.onRemove}>
-    //   </div> : null;
+
+    // conditional components
+    const editBtn = editing ?
+      <TouchableHighlight onPress={onRemove} underlayColor="transparent">
+        <Image
+          style={companyStyle.remove}
+          source={require('../images/minus.png')}
+        />
+      </TouchableHighlight> : null;
     // const graph = data.length ?
     //   <LineGraph stockData={myStockData}
     //     sentimentData={mySentimentData}
@@ -76,6 +84,7 @@ export default class Company extends Component {
 
     return (
       <View style={companyStyle.company}>
+        {editBtn}
         <Avatar
           symbol={symbol}
           description={description}

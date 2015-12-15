@@ -98,7 +98,15 @@ export const companyStyle = StyleSheet.create({
     paddingRight: rightPadding,
     paddingTop: 5,
     paddingBottom: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
+  remove: {
+    resizeMode: 'contain',
+    width: 20,
+    height: 20,
+    marginRight: 10,
+  }
 });
 
 export const avatarStyle = StyleSheet.create({
