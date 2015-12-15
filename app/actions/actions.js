@@ -60,6 +60,12 @@ export function initialize() {
   };
 }
 
+/** Refresh the stock data for the companies we already have */
+export function refreshCompanyData() {
+  return (dispatch, getState) =>
+    dispatch(getStockData(getState().companies.companies.map(c => c.symbol)));
+}
+
 /** Add a company */
 export function addCompany(company) {
   return (dispatch, getState) => {

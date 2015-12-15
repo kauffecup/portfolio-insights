@@ -14,10 +14,15 @@
 // limitations under the License.
 //------------------------------------------------------------------------------
 
-import React, { Component, PropTypes, ListView } from 'react-native';
+import React, {
+  Component,
+  PropTypes,
+  ListView,
+} from 'react-native';
 import { connect } from 'react-redux/native';
 import clone from 'clone';
 import { companiesStyle } from '../styles/styles';
+import RefreshableListView from 'react-native-refreshable-listview';
 
 import Company from '../components/Company';
 
@@ -25,6 +30,7 @@ import {
   getSentimentHistory,
   removeCompany,
   selectSymbolAndDate,
+  refreshCompanyData,
 } from '../../actions/actions';
 
 class Companies extends Component {
@@ -46,9 +52,10 @@ class Companies extends Component {
   render() {
     const { dispatch, strings, companies, editing, selectedDate } = this.props;
     return (
-      <ListView
+      <RefreshableListView
         style={companiesStyle.companies}
         dataSource={this.state.dataSource}
+        loadData={() => dispatch(refreshCompanyData())}
         renderRow={c =>
           <Company key={c.symbol} {...c}
             strings={strings}
