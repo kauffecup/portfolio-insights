@@ -16,6 +16,7 @@
 
 import React, { Component, PropTypes, View, Text } from 'react-native';
 import { companyStyle } from '../styles/styles';
+import Avatar           from './Avatar';
 
 export default class Company extends Component {
   formatStockData() {
@@ -37,17 +38,17 @@ export default class Company extends Component {
   render() {
     const { symbol, description, data, onClick, sentimentHistory,
       onSelectDate, editing, entities } = this.props;
-    // const myStockData = this.formatStockData();
-    // const sentimentLoading = sentimentHistory === 'loading';
-    //
-    // let mySentimentData = [];
-    // if (!sentimentLoading) {
-    //   mySentimentData = this.formatSentimentData();
-    // }
-    //
-    // const loading = !data.length || sentimentLoading;
-    // const change = data.length ? data[data.length - 1].change : null;
-    // const last = data.length ? data[data.length - 1].last : null;
+    const myStockData = this.formatStockData();
+    const sentimentLoading = sentimentHistory === 'loading';
+
+    let mySentimentData = [];
+    if (!sentimentLoading) {
+      mySentimentData = this.formatSentimentData();
+    }
+
+    const loading = !data.length || sentimentLoading;
+    const change = data.length ? data[data.length - 1].change : null;
+    const last = data.length ? data[data.length - 1].last : null;
     //
     // // conditional components
     // const editBtn = editing ?
@@ -74,7 +75,16 @@ export default class Company extends Component {
     // );
 
     return (
-      <Text style={companyStyle.text}>{description + ' (' + symbol + ')'}</Text>
+      <View style={companyStyle.company}>
+        <Avatar
+          symbol={symbol}
+          description={description}
+          change={change}
+          last={last}
+          loading={loading}
+          onClick={onClick}
+        />
+      </View>
     );
   }
 }

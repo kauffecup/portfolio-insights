@@ -20,6 +20,8 @@ const accentColor = '#4292c6';
 const accentColor2 = '#08306b';
 const backgroundColor = '#f0f0f0';
 const secondaryTextColor = '#969696';
+const negativeColor = '#cb181d';
+const positiveColor = '#2ca02c';
 
 const leftPadding = 7;
 const rightPadding = 7;
@@ -33,12 +35,12 @@ export const appStyle = StyleSheet.create({
 
 export const headerStyle = StyleSheet.create({
   header: {
-    paddingTop: 30,
+    paddingTop: 40,
     paddingLeft: leftPadding,
     paddingRight: rightPadding,
-    paddingBottom: 30,
+    paddingBottom: 20,
     height: 30,
-    alignItems: 'flex-start',
+    alignItems: 'center',
     backgroundColor: accentColor,
     flexDirection: 'row',
   },
@@ -91,7 +93,40 @@ export const companiesStyle = StyleSheet.create({
 });
 
 export const companyStyle = StyleSheet.create({
-  text: {
-    padding: 5,
+  company: {
+    paddingLeft: leftPadding,
+    paddingRight: rightPadding,
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+});
+
+export const avatarStyle = StyleSheet.create({
+  avatar: {
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  symbol: {
+    color: accentColor,
+    fontSize: 20,
+    width: 70,
+  },
+  description: {
+  },
+  neutral: {
+    color: secondaryTextColor,
+    width: 70,
+  },
+  negative: {
+    color: negativeColor,
+    width: 70,
+  },
+  positive: {
+    color: positiveColor,
+    width: 70,
+  },
+  last: {
   },
 });
