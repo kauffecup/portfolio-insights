@@ -20,8 +20,10 @@ import React, {
   View,
   Image,
   TouchableHighlight,
+  processColor,
 } from 'react-native';
-import { companyStyle } from '../styles/styles';
+import RNChart from 'react-native-chart';
+import { companyStyle, accentColor } from '../styles/styles';
 import Avatar           from './Avatar';
 
 export default class Company extends Component {
@@ -56,43 +58,42 @@ export default class Company extends Component {
     const change = data.length ? data[data.length - 1].change : null;
     const last = data.length ? data[data.length - 1].last : null;
 
-    // conditional components
-    const editBtn = editing ?
-      <TouchableHighlight onPress={onRemove} underlayColor="transparent">
-        <Image
-          style={companyStyle.remove}
-          source={require('../images/minus.png')}
-        />
-      </TouchableHighlight> : null;
-    // const graph = data.length ?
-    //   <LineGraph stockData={myStockData}
-    //     sentimentData={mySentimentData}
-    //     onSelectDate={onSelectDate} />
-    //   : null;
-    // const bubbleChart = entities.length ?
-    //   <EntityBubbleChart entities={entities} />
-    //   : null;
-    //
-    // return (
-    //   <div className="company">
-    //     {editBtn}
-    //     <Avatar symbol={symbol} description={description} change={change} last={last} loading={loading} onClick={onClick} />
-    //     {graph}
-    //     {bubbleChart}
-    //   </div>
-    // );
-
     return (
       <View style={companyStyle.company}>
-        {editBtn}
-        <Avatar
-          symbol={symbol}
-          description={description}
-          change={change}
-          last={last}
-          loading={loading}
-          onClick={onClick}
-        />
+        <View style={companyStyle.row}>
+          {editing ? <TouchableHighlight
+            onPress={onRemove}
+            underlayColor="transparent"
+          >
+            <Image
+              style={companyStyle.remove}
+              source={require('../images/minus.png')}
+            />
+          </TouchableHighlight> : null}
+          <Avatar
+            symbol={symbol}
+            description={description}
+            change={change}
+            last={last}
+            loading={loading}
+            onClick={onClick}
+          />
+        </View>
+        {data.length ? <RNChart
+          style={companyStyle.chart}
+          xLabels={myStockData.map(d => d.date)}
+          tightBounds={true}
+          showXAxisLabels={false}
+          chartData={[{
+            lineWidth: 1,
+            data: myStockData.map(d => d.last),
+            showDataPoint: true,
+            color: processColor(accentColor),
+            dataPointRadius: 2,
+            dataPointColor: processColor(accentColor),
+            dataPointFillColor: processColor('white'),
+          }]}
+        /> : null}
       </View>
     );
   }

@@ -16,15 +16,15 @@
 
 import { StyleSheet } from 'react-native';
 
-const accentColor = '#4292c6';
-const accentColor2 = '#08306b';
-const backgroundColor = '#f0f0f0';
-const secondaryTextColor = '#969696';
-const negativeColor = '#cb181d';
-const positiveColor = '#2ca02c';
+export const accentColor = '#4292c6';
+export const accentColor2 = '#08306b';
+export const backgroundColor = '#f0f0f0';
+export const secondaryTextColor = '#969696';
+export const negativeColor = '#cb181d';
+export const positiveColor = '#2ca02c';
 
-const leftPadding = 7;
-const rightPadding = 7;
+export const leftPadding = 7;
+export const rightPadding = 7;
 
 export const appStyle = StyleSheet.create({
   portfolioInsights: {
@@ -98,6 +98,8 @@ export const companyStyle = StyleSheet.create({
     paddingRight: rightPadding,
     paddingTop: 5,
     paddingBottom: 5,
+  },
+  row: {
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -106,7 +108,11 @@ export const companyStyle = StyleSheet.create({
     width: 20,
     height: 20,
     marginRight: 10,
-  }
+  },
+  chart: {
+    height: 80,
+    marginTop: 5,
+  },
 });
 
 export const avatarStyle = StyleSheet.create({
