@@ -14,9 +14,17 @@
 // limitations under the License.
 //------------------------------------------------------------------------------
 
-import React, { Component, PropTypes, View, TextInput, ListView, Text } from 'react-native';
+import React, {
+  Component,
+  PropTypes,
+  View,
+  TextInput,
+  ListView,
+  Text,
+  TouchableHighlight,
+} from 'react-native';
 import Constants from '../../constants/Constants';
-import { searcherStyle } from '../styles/styles';
+import { searcherStyle, accentColor2 } from '../styles/styles';
 
 /**
  * A Searcher.
@@ -126,13 +134,17 @@ export default class Searcher extends Component {
           style={searcherStyle.list}
           dataSource={dataSource}
           renderRow={pC => {
-            if (typeof pC === 'string') {
-              return <Text style={searcherStyle.text}>{pC}</Text>;
-            }
+            const isText = typeof pC === 'string';
+            const onPress = isText ? () => {} : this.handleClick.bind(this, pC);
+            const text = isText ? pC : pC.description + ' (' + pC.symbol + ')';
             return (
-              <Text style={searcherStyle.text} onPress={this.handleClick.bind(this, pC)}>
-                {pC.description + ' (' + pC.symbol + ')'}
-              </Text>
+              <TouchableHighlight
+                style={searcherStyle.row}
+                onPress={onPress}
+                underlayColor={accentColor2}
+              >
+                <Text style={searcherStyle.text}>{text}</Text>
+              </TouchableHighlight>
             );
           }}
         />

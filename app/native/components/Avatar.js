@@ -31,20 +31,14 @@ export default class Avatar extends Component {
     if (hC && (change < 0)) {
       cClass = 'negative';
     } else if (hC && (change > 0)) {
-      cClass = 'positive'
+      cClass = 'positive';
     }
     return (
       <View style={avatarStyle.avatar}>
-        <View style={avatarStyle.row}>
-          <Text style={avatarStyle.symbol}>{symbol}</Text>
-          <Text style={avatarStyle.description}>{description}</Text>
-        </View>
-        {(hC || hL) ?
-          <View style={avatarStyle.row}>
-            {hC ? <Text style={avatarStyle[cClass]}>{change}</Text> : null}
-            {hL ? <Text style={avatarStyle.last}>{last}</Text> : null}
-          </View>
-        : null}
+        <Text style={avatarStyle.symbol}>{symbol}</Text>
+        <Text style={avatarStyle.description}>{description}</Text>
+        {hL ? <Text style={avatarStyle.last}>{last}</Text> : null}
+        {hC ? <Text style={avatarStyle[cClass]}>{change}</Text> : null}
       </View>
     );
   }

@@ -18,10 +18,11 @@ import React, {
   Component,
   PropTypes,
   ListView,
+  View,
 } from 'react-native';
 import { connect } from 'react-redux/native';
 import clone from 'clone';
-import { companiesStyle } from '../styles/styles';
+import { companiesStyle, activityIndicatorStyle } from '../styles/styles';
 import RefreshableListView from 'react-native-refreshable-listview';
 
 import Company from '../components/Company';
@@ -56,6 +57,10 @@ class Companies extends Component {
         style={companiesStyle.companies}
         dataSource={this.state.dataSource}
         loadData={() => dispatch(refreshCompanyData())}
+        stylesheet={activityIndicatorStyle}
+        refreshingIndictatorComponent={
+          <RefreshableListView.RefreshingIndicator stylesheet={activityIndicatorStyle} />
+        }
         renderRow={c =>
           <Company key={c.symbol} {...c}
             strings={strings}

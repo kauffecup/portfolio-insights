@@ -23,8 +23,8 @@ export const secondaryTextColor = '#969696';
 export const negativeColor = '#cb181d';
 export const positiveColor = '#2ca02c';
 
-export const leftPadding = 7;
-export const rightPadding = 7;
+export const leftPadding = 15;
+export const rightPadding = 15;
 
 export const appStyle = StyleSheet.create({
   portfolioInsights: {
@@ -71,8 +71,6 @@ export const searcherStyle = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderBottomWidth: 1,
-    borderBottomColor: secondaryTextColor,
     paddingLeft: leftPadding,
     paddingRight: rightPadding,
     paddingTop: 5,
@@ -80,15 +78,26 @@ export const searcherStyle = StyleSheet.create({
   },
   list: {
     flex: 1,
+    borderTopWidth: 1,
+    borderTopColor: secondaryTextColor,
+  },
+  row: {
+    paddingLeft: leftPadding,
+    paddingRight: rightPadding,
+    paddingTop: 5,
+    paddingBottom: 5,
+    backgroundColor: accentColor,
   },
   text: {
-    padding: 5,
+    color: '#fff',
   },
 });
 
 export const companiesStyle = StyleSheet.create({
   companies: {
     flex: 1,
+    borderTopWidth: 1,
+    borderTopColor: secondaryTextColor,
   },
 });
 
@@ -115,32 +124,49 @@ export const companyStyle = StyleSheet.create({
   },
 });
 
+export const activityIndicatorStyle = StyleSheet.create({
+  wrapper: {
+    position: 'absolute',
+    top: -30,
+    left: 0,
+    right: 0,
+    marginTop: 0,
+    height: 30,
+  },
+  description: {
+    height: 0,
+    width: 0,
+  },
+});
+
+function getChange(color) {
+  return {
+    backgroundColor: color,
+    color: '#fff',
+    width: 50,
+    padding: 2,
+    textAlign: 'center',
+    borderRadius: 5,
+    marginLeft: 10,
+  };
+}
 export const avatarStyle = StyleSheet.create({
   avatar: {
-  },
-  row: {
     flexDirection: 'row',
     alignItems: 'center',
+    flex: 1,
   },
   symbol: {
     color: accentColor,
     fontSize: 20,
-    width: 70,
+    width: 60,
   },
   description: {
+    flex: 1,
   },
-  neutral: {
-    color: secondaryTextColor,
-    width: 70,
-  },
-  negative: {
-    color: negativeColor,
-    width: 70,
-  },
-  positive: {
-    color: positiveColor,
-    width: 70,
-  },
+  neutral: getChange(secondaryTextColor),
+  negative: getChange(negativeColor),
+  positive: getChange(positiveColor),
   last: {
   },
 });
