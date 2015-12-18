@@ -28,13 +28,14 @@ import {
 
 class Companies extends Component {
   render() {
-    const { dispatch, strings, companies, editing, selectedDate } = this.props;
+    const { dispatch, strings, companies, editing, selectedDate, language } = this.props;
     return (
       <ul className="companies">{companies.map(c =>
         <Company key={c.symbol} {...c}
           strings={strings}
           editing={editing}
           selectedDate={selectedDate}
+          language={language}
           onSelectDate={d => dispatch(selectSymbolAndDate(c.symbol, d))}
           onClick={() => dispatch(getSentimentHistory(c.symbol))}
           onRemove={() => dispatch(removeCompany(c))} />
@@ -49,6 +50,7 @@ Companies.propTypes = {
   companies: PropTypes.array.isRequired,
   editing: PropTypes.bool.isRequired,
   selectedDate: PropTypes.string.isRequired,
+  language: PropTypes.string,
 };
 
 /**
@@ -74,6 +76,7 @@ const select = state => {
     companies: myCompanies,
     editing: state.companies.editing,
     selectedDate: state.selectedDate,
+    language: state.language,
   };
 };
 

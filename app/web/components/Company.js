@@ -39,7 +39,7 @@ export default class Company extends Component {
 
   render() {
     const { symbol, description, data, onClick, sentimentHistory,
-      onSelectDate, editing, entities } = this.props;
+      onSelectDate, editing, entities, language, strings } = this.props;
     const myStockData = this.formatStockData();
     const sentimentLoading = sentimentHistory === 'loading';
 
@@ -61,7 +61,9 @@ export default class Company extends Component {
     const graph = data.length ?
       <LineGraph stockData={myStockData}
         sentimentData={mySentimentData}
-        onSelectDate={onSelectDate} />
+        onSelectDate={onSelectDate}
+        language={language}
+        strings={strings} />
       : null;
     const bubbleChart = entities.length ?
       <EntityBubbleChart entities={entities} />
@@ -88,6 +90,8 @@ Company.propTypes = {
   onSelectDate: PropTypes.func.isRequired,
   selected: PropTypes.bool.isRequired,
   entities: PropTypes.array,
+  language: PropTypes.string,
+  strings: PropTypes.object.isRequired,
   sentimentHistory: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,

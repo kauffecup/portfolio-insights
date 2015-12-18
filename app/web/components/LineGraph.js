@@ -22,7 +22,7 @@ const DRAW_TIME = 400;
 
 export default class LineGraph extends Component {
   componentDidMount() {
-    const { stockData, sentimentData, onSelectDate } = this.props;
+    const { stockData, sentimentData, onSelectDate, language, strings } = this.props;
     const svg = dimple.newSvg(this.refs._graph, '100%', '100%');
     this.lineChart = new dimple.chart(svg); // eslint-disable-line
     this.lineChart.setBounds(30, 14, '100%,-40', '100%,-34');
@@ -39,9 +39,11 @@ export default class LineGraph extends Component {
     this.dataSeries = this.lineChart.addSeries('symbol', dimple.plot.line, [this.x, this.dataY]);
     this.dataSeries.data = stockData || [];
     this.dataSeries.lineMarkers = true;
+    this.dataSeries.getTooltipText = this.stockValueTooltip.bind(this, language, strings);
     this.sentimentSeries = this.lineChart.addSeries('mattDamon', dimple.plot.line, [this.x, this.sentimentY]);
     this.sentimentSeries.data = sentimentData || [];
     this.sentimentSeries.lineMarkers = true;
+    this.sentimentSeries.getTooltipText = this.sentimentTooltip.bind(this, language, strings);
     this.sentimentSeries.addEventHandler('click', e => onSelectDate(moment(e.xValue).format('YYYY-MM-DD')));
 
     // initialize the legend
@@ -68,6 +70,20 @@ export default class LineGraph extends Component {
     this.sentimentY.overrideMax = Math.max(...mySentimentNums);
   }
 
+  stockValueTooltip(language, strings, e) {
+    return [
+      moment(e.x).locale(language || 'en').format('LL'),
+      strings.value + ': ' + (e.yValue || 0).toFixed(2),
+    ];
+  }
+
+  sentimentTooltip(language, strings, e) {
+    return [
+      moment(e.x).locale(language || 'en').format('LL'),
+      strings.sentiment + ': ' + (e.yValue || 0).toFixed(2),
+    ];
+  }
+
   render() {
     return <span className="graph" ref="_graph"></span>;
   }
@@ -77,4 +93,6 @@ LineGraph.propTypes = {
   stockData: PropTypes.array.isRequired,
   sentimentData: PropTypes.array,
   onSelectDate: PropTypes.func.isRequired,
+  strings: PropTypes.object.isRequired,
+  language: PropTypes.string,
 };

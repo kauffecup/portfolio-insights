@@ -31,12 +31,12 @@ require('babel/polyfill');
 // load in locales so we can force it if we need to
 // require('moment/locale/en');
 // require('moment/locale/zh');
-// require('moment/locale/fr');
-// require('moment/locale/de');
-// require('moment/locale/it');
-// require('moment/locale/ja');
-// require('moment/locale/pt-br');
-// require('moment/locale/es');
+require('moment/locale/fr');
+require('moment/locale/de');
+require('moment/locale/it');
+require('moment/locale/ja');
+require('moment/locale/pt-br');
+require('moment/locale/es');
 
 // React.initializeTouchEvents(true);
 render( <Root store={store} />, rootElement );
